@@ -15,6 +15,14 @@ class SchedulesController < ApplicationController
 		render json: @shift 
 	end
 
+	def update
+
+		@shift = Schedule.find_by(id: params[:id])
+		@shift.update(params.require(:shift).permit(:covered))
+		render json: @shift 
+
+	end
+
 	private
 		def schedule_params
 			params.require(:shift).permit(:day, :time, :covered)
